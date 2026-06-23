@@ -1,20 +1,24 @@
-name: CI-Workflow
+name: CI-WORKFLOW
 on: push
 
 jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v7
 
-      - name: Setup NodeJS
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build Application
+      - name: Build application
         run: npm run build
+
+      - name: Done
+        run: echo "Build completed successfully"
