@@ -9,8 +9,8 @@ resource "aws_instance" "GitAction_Demo" {
     Name = "GitAction-Demo"
   }
 }
-resource "aws_s3_bucket" "Chin2-Mistry-GitAction-Demo-Bucket123456" {
-  bucket = "Chin2-Mistry-GitAction-Demo-Bucket123456"
+resource "aws_s3_bucket" "chin2-mistry-gitaction-demo-bucket123456" {
+  bucket = "chin2-mistry-gitaction-demo-bucket123456"
 
   tags = {
     Name        = "My bucket"
