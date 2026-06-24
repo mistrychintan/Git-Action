@@ -9,7 +9,7 @@ resource "aws_instance" "GitAction_Demo" {
     Name = "GitAction-Demo"
   }
 }
-resource "aws_s3_bucket" "GitAction" {
+resource "aws_s3_bucket" "Chin2-Mistry-GitAction-Demo-Bucket123456" {
   bucket = "my-tf-test-bucket"
 
   tags = {
