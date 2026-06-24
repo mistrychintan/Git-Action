@@ -1,4 +1,4 @@
-procider "aws" {
+provider "aws" {
   region ="us-east-2"
 }
 resource "aws_instance" "GitAction_Demo" {
