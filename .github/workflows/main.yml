@@ -1,50 +1,33 @@
-name: CI-WORKFLOW
+name: TERRAFORM-CI
 
 on:
   push:
+    branches: main
+  workflow_dispatch:
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+  
 
 jobs:
-  build:
+  terraform:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      - name: Terraform Init
+        run: terraform init
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Terraform Validate
+        run: terraform calidate
 
-      - name: Build Application
-        run: npm run build
+      - name: Terraform Plan
+        run: terraform plan
 
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: CI=true npm test
-
-  deploy:
-    needs: [build, test]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Deploy Application
-        run: echo "Deploying ..."
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
